@@ -97,7 +97,7 @@ resource serverFarm 'Microsoft.Web/serverfarms@2022-03-01' = {
   }
   kind: 'elastic'
   properties: {
-    maximumElasticWorkerCount: 20
+    maximumElasticWorkerCount: 8
   }
 }
 
@@ -110,6 +110,7 @@ resource function 'Microsoft.Web/sites@2022-03-01' = {
     httpsOnly: true
     virtualNetworkSubnetId: virtualNetwork::integrationSubnet.id // Specify a virtual network subnet resource ID to enable regional virtual network integration.
     siteConfig: {
+      functionsRuntimeScaleMonitoringEnabled: true
       appSettings: [
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
